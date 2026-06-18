@@ -29,7 +29,8 @@ def main():
 
         uploaded_file = st.file_uploader(
             "Choose a CSV file",
-            type=["csv"]
+            type=["csv"],
+            key="csv_file_uploader"
         )
 
         date_format_key = st.selectbox(
