@@ -1,9 +1,15 @@
+import streamlit as st
+
+from config.constants import DEFAULT_PHONE_RULES, DATE_FORMATS
 from services.csv_service import CSVService
 from services.validation_service import ValidationService
 
 from ui.metrics import render_metrics
 from ui.dashboard import render_preview
 from ui.downloads import render_download_buttons
+
+PHONE_RULES = DEFAULT_PHONE_RULES
+DATE_FORMAT = DATE_FORMATS["YYYY-MM-DD"]
 
 
 def main():
@@ -21,8 +27,8 @@ def main():
     valid_df, invalid_df = (
         ValidationService.validate_dataframe(
             df,
-            phone_rules,
-            date_format
+            PHONE_RULES,
+            DATE_FORMAT
         )
     )
 
