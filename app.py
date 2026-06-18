@@ -19,7 +19,7 @@ def main():
         layout="wide"
     )
 
-    st.title("CSV Data Validator")
+    st.title("Data Validator")
     st.write(
         "Upload a CSV file to validate order records for phone, date, payment mode, and payment status."
     )
