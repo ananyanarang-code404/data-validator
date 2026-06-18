@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def _highlight_rows(row, is_invalid=False):
-    base = "background-color: #e8f5e9;" if not is_invalid else "background-color: #ffebee;"
+    base = "background-color: #0a0a0a;" if not is_invalid else "background-color:#0a0a0a;"
     return [base for _ in row]
 
 
