@@ -353,12 +353,44 @@ def main():
         help="CSVs containing columns like Order ID, Customer Phone, Product Name, Unit Price, etc."
     )
 
-    if uploaded_file is not None:
-        # If a new file is uploaded, reload it into session state
-        if st.session_state.file_name != uploaded_file.name:
-            st.session_state.df = pd.read_csv(uploaded_file)
-            st.session_state.file_name = uploaded_file.name
-            st.toast(f"Successfully uploaded: {uploaded_file.name}", icon="📁")
+  if uploaded_file is not None:
+    # If a new file is uploaded, reload it into session state
+    if st.session_state.file_name != uploaded_file.name:
+
+        df = pd.read_csv(uploaded_file)
+
+        # Normalize column names
+        df.columns = df.columns.str.strip()
+
+        column_mapping = {
+            "order_id": "Order ID",
+            "customer_id": "Customer ID",
+            "order_date": "Order Date",
+            "country": "Customer Country",
+            "customer_country": "Customer Country",
+            "phone": "Customer Phone",
+            "customer_phone": "Customer Phone",
+            "product_id": "Product ID",
+            "product_name": "Product Name",
+            "quantity": "Quantity",
+            "price": "Unit Price",
+            "unit_price": "Unit Price",
+            "payment_mode": "Payment Mode",
+            "transaction_id": "Transaction ID",
+            "payment_status": "Payment Status"
+        }
+
+        df.rename(columns=column_mapping, inplace=True)
+        st.write("Detected Columns:")
+        st.write(df.columns.tolist())
+
+        st.session_state.df = df
+        st.session_state.file_name = uploaded_file.name
+
+        st.toast(
+            f"Successfully uploaded: {uploaded_file.name}",
+            icon="📁"
+        )
 
     # Render UI based on whether data exists
     if st.session_state.df is not None:
